@@ -31,6 +31,7 @@ using namespace std;
 const maxx=30000
 UINT n;
 vector<pii> px[maxx+5],py[maxx*2+10];
+INT minx,miny,bigx,bigy;
 
 /*fn*/
 /*
@@ -40,11 +41,56 @@ vector<pii> px[maxx+5],py[maxx*2+10];
 2=下面
 3=左邊
 */
-int arr(int fromarr,int mirarr){
+INT arr(INT fromarr,INT mirarr){
 	if(mirarr){
 		return (fromarr-1+4)%4;
 	}else{
 		return (fromarr+1)%4;
+	}
+}
+INT finder(INT arr,INT x,INT y){/*找出距離最近的鏡子*/
+	switch(arr){
+		{case 0:
+			INT it=0;
+			INT maxcango=px[x].size();
+			while((maxcango-it) && (px[x][it]).first<=y)it++;
+			if(maxcango-it){
+				return maxcango;
+			}else{
+				return px[x].size();
+			}
+		break;}
+
+		{case 1:
+			INT it=0;
+			INT maxcango=py[y].size();
+			while((maxcango-it) && (py[y][it]).first<=x)it++;
+			if(maxcango-it){
+				return maxcango;
+			}else{
+				return py[y].size();
+			}
+		break;}
+
+		{case 2:
+			INT maxcango=px[x].size()-1;
+			while((maxcango+1) && (px[x][maxcango]).first>=y)maxcango--;
+			if(maxcango+1){
+				return maxcango;
+			}else{
+				return px[x].size();
+			}
+		break;}
+
+		{case 3:
+			INT maxcango=py[y].size()-1;
+			while((maxcango+1) && (py[y][maxcango]).first>=x)maxcango--;
+			if(maxcango+1){
+				return maxcango;
+			}else{
+				return py[y].size();
+			}
+		break;}
 	}
 }
 
@@ -58,6 +104,23 @@ int main(){
 		INT x,y,t;
 		cin>>x>>y>>t;
 		y+=maxx;
+		(px[x]).push_back({y,t});
+		(py[y]).push_back({x,t});
+		if(i){
+			minx=min(x,minx);
+			miny=min(y,miny);
+			bigx=max(x,bigx);
+			bigy=max(y,bigy);
+		}
+	}
+	for(INT i=minx;i<=bigx;i++){
+		sort((px[i]).begin(),(px[i]).end());
+	}
+	for{INT i=miny;i<=bigy;i++}{
+		sort((py[i]).begin(),(py[i]).end());
+	}
+	INT nowx=0,nowy=0,nowarr=1,ans=0;
+	while(true){
 
 	}
 	return 0;
