@@ -21,14 +21,16 @@ using namespace std;
 /*define type*/
 #define ulli unsigned long long int
 #define lli long long int
-#define pii pair<INT,INT>
-#define INT int
+#define plli pair<lli,lli>
+#define pulli pair<ulli,ulli>
+#define INT lli
 #define UINT unsigned INT
+#define pii pair<INT,INT>
 
 /*struct*/
 
 /*num*/
-const INT maxx=30000
+const INT maxx=30000;
 UINT n;
 vector<pii> px[maxx+5],py[maxx*2+10];
 INT minx,miny,bigx,bigy;
@@ -115,17 +117,22 @@ int main(){
 				miny=min(y,miny);
 				bigx=max(x,bigx);
 				bigy=max(y,bigy);
+			}else{
+				minx=x;
+				miny=y;
+				bigx=x;
+				bigy=y;
 			}
 		}
 		for(INT i=minx;i<=bigx;i++){
 			sort((px[i]).begin(),(px[i]).end());
 		}
-		for{INT i=miny;i<=bigy;i++}{
+		for(INT i=miny;i<=bigy;i++){
 			sort((py[i]).begin(),(py[i]).end());
 		}
 	}
 	/*solve*/
-	INT nowx=0,nowy=0,nowarr=1,ans=0;
+	INT nowx=0,nowy=maxx,nowarr=1,ans=0;
 	while(true){
 		int fit=finder(nowarr,nowx,nowy);
 		if(nowarr==0 || nowarr==2){
@@ -138,13 +145,14 @@ int main(){
 				continue;
 			}
 		}else if(nowarr==1 || nowarr==3){
-			if(fit==(py[y]).size()){
+			if(fit==(py[nowy]).size()){
 				break;
 			}else{
 				nowx=(py[nowy][fit]).first;
 				nowarr=arr(nowarr,(py[nowy][fit]).second);
 				ans++;
 				continue;
+			}
 		}
 	}
 	cout<<ans;
