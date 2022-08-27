@@ -4,16 +4,7 @@
 */
 
 /*include*/
-#include<iostream>
-#include<algorithm>
-#include<cmath>
-#include<string>
-#include<sstream>
-#include<vector>
-#include<queue>
-#include<deque>
-#include<map>
-#include<set>
+#include<bits/stdc++.h>
 
 /*using namespace*/
 using namespace std;
@@ -81,35 +72,35 @@ int main(){
 	/*solve*/
 	INT nowx=0,nowy=maxx,nowarr=1,ans=0;
 	while(true){
-		switch(nowarr){
-			{case 0:
-				auto it=upper_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,1));
-				if(it==px[nowx].end()) break;
-				nowy=(*it).first;
-				if((*it).second==1)nowarr=3;
-				else nowarr=1;
-			break;}
-			{case 1:
-				auto it=upper_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,1));
-				if(it==py[nowy].end()) break;
-				nowx=(*it).first;
-				if((*it).second==1)nowarr=2;
-				else nowarr=0;
-			break;}
-			{case 2:
-				auto it=lower_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,0));
-				if(it==px[nowx].begin()) break;
-				nowy=(*it).first;
-				if((*it).second==1)nowarr=1;
-				else nowarr=3;
-			break;}
-			{case 3:
-				auto it=lower_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,0));
-				if(it==py[nowy].begin()) break;
-				nowx=(*it).first;
-				if((*it).second==1)nowarr=0;
-				else nowarr=2;
-			break;}
+		if(nowarr==0){
+			auto it=upper_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,1));
+			if(it==px[nowx].end()) break;
+			nowy=(*it).first;
+			if((*it).second==1)nowarr=3;
+			else nowarr=1;
+		}
+		if(nowarr==1){
+			auto it=upper_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,1));
+			if(it==py[nowy].end()) break;
+			nowx=(*it).first;
+			if((*it).second==1)nowarr=2;
+			else nowarr=0;
+		}
+		if(nowarr==2){
+			auto it=lower_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,0));
+			if(it==px[nowx].begin()) break;
+			it--;
+			nowy=(*it).first;
+			if((*it).second==1)nowarr=1;
+			else nowarr=3;
+		}
+		if(nowarr==3){
+			auto it=lower_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,0));
+			if(it==py[nowy].begin()) break;
+			it--;
+			nowx=(*it).first;
+			if((*it).second==1)nowarr=0;
+			else nowarr=2;
 		}
 		ans++;
 	}
