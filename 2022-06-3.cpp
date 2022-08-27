@@ -30,7 +30,7 @@ using namespace std;
 /*num*/
 const maxx=30000
 UINT n;
-vector<pii>
+vector<pii> px[maxx+5],py[maxx*2+10];
 
 /*fn*/
 /*
