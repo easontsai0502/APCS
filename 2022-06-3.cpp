@@ -28,7 +28,7 @@ using namespace std;
 /*struct*/
 
 /*num*/
-const maxx=30000
+const INT maxx=30000
 UINT n;
 vector<pii> px[maxx+5],py[maxx*2+10];
 INT minx,miny,bigx,bigy;
@@ -41,7 +41,7 @@ INT minx,miny,bigx,bigy;
 2=下面
 3=左邊
 */
-INT arr(INT fromarr,INT mirarr){
+INT arr(INT fromarr,INT mirarr){/*處理鏡子轉向*/
 	if(mirarr){
 		return (fromarr-1+4)%4;
 	}else{
@@ -96,33 +96,58 @@ INT finder(INT arr,INT x,INT y){/*找出距離最近的鏡子*/
 
 /*main*/
 int main(){
-	cin.tie(0);
-	cout.tie(0);
-	ios::sync_with_stdio(false);
-	cin>>n;
-	for(UINT i=0;i<n;i++){
-		INT x,y,t;
-		cin>>x>>y>>t;
-		y+=maxx;
-		(px[x]).push_back({y,t});
-		(py[y]).push_back({x,t});
-		if(i){
-			minx=min(x,minx);
-			miny=min(y,miny);
-			bigx=max(x,bigx);
-			bigy=max(y,bigy);
+	{/*IO加速*/
+		cin.tie(0);
+		cout.tie(0);
+		ios::sync_with_stdio(false);
+	}
+	
+	{/*處理輸入*/
+		cin>>n;
+		for(UINT i=0;i<n;i++){
+			INT x,y,t;
+			cin>>x>>y>>t;
+			y+=maxx;
+			(px[x]).push_back({y,t});
+			(py[y]).push_back({x,t});
+			if(i){
+				minx=min(x,minx);
+				miny=min(y,miny);
+				bigx=max(x,bigx);
+				bigy=max(y,bigy);
+			}
+		}
+		for(INT i=minx;i<=bigx;i++){
+			sort((px[i]).begin(),(px[i]).end());
+		}
+		for{INT i=miny;i<=bigy;i++}{
+			sort((py[i]).begin(),(py[i]).end());
 		}
 	}
-	for(INT i=minx;i<=bigx;i++){
-		sort((px[i]).begin(),(px[i]).end());
-	}
-	for{INT i=miny;i<=bigy;i++}{
-		sort((py[i]).begin(),(py[i]).end());
-	}
+	/*solve*/
 	INT nowx=0,nowy=0,nowarr=1,ans=0;
 	while(true){
-
+		int fit=finder(nowarr,nowx,nowy);
+		if(nowarr==0 || nowarr==2){
+			if(fit==(px[nowx]).size()){
+				break;
+			}else{
+				nowy=(px[nowx][fit]).first;
+				nowarr=arr(nowarr,(px[nowx][fit]).second);
+				ans++;
+				continue;
+			}
+		}else if(nowarr==1 || nowarr==3){
+			if(fit==(py[y]).size()){
+				break;
+			}else{
+				nowx=(py[nowy][fit]).first;
+				nowarr=arr(nowarr,(py[nowy][fit]).second);
+				ans++;
+				continue;
+		}
 	}
+	cout<<ans;
 	return 0;
 }
 
