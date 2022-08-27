@@ -59,22 +59,11 @@ int main(){
 			y+=maxx;
 			(px[x]).push_back({y,t});
 			(py[y]).push_back({x,t});
-			if(i){
-				minx=min(x,minx);
-				miny=min(y,miny);
-				bigx=max(x,bigx);
-				bigy=max(y,bigy);
-			}else{
-				minx=x;
-				miny=y;
-				bigx=x;
-				bigy=y;
-			}
 		}
-		for(INT i=minx;i<=bigx;i++){
+		for(INT i=0;i<=maxx;i++){
 			sort((px[i]).begin(),(px[i]).end());
 		}
-		for(INT i=miny;i<=bigy;i++){
+		for(INT i=0;i<=maxx*2;i++){
 			sort((py[i]).begin(),(py[i]).end());
 		}
 	}
@@ -82,6 +71,7 @@ int main(){
 	
 	INT nowx=0,nowy=maxx,nowarr=1,ans=0,aaa=1,bbb=0;
 	while(true){
+		cout<<"ans="<<ans<<",x="<<nowx<<",y="<<nowy-maxx<<",arr="<<nowarr<<"\n";
 		if(nowarr==0){
 			auto it=upper_bound(
 				(px[nowx]).begin(),
@@ -90,7 +80,7 @@ int main(){
 			);
 			if(it==px[nowx].end()) break;
 			nowy=(*it).first;
-			if((*it).second==1)nowarr=3;
+			if((*it).second==aaa)nowarr=3;
 			else nowarr=1;
 		}
 		if(nowarr==1){
@@ -101,7 +91,7 @@ int main(){
 			);
 			if(it==py[nowy].end()) break;
 			nowx=(*it).first;
-			if((*it).second==1)nowarr=2;
+			if((*it).second==aaa)nowarr=2;
 			else nowarr=0;
 		}
 		if(nowarr==2){
@@ -113,7 +103,7 @@ int main(){
 			if(it==px[nowx].begin()) break;
 			it--;
 			nowy=(*it).first;
-			if((*it).second==1)nowarr=1;
+			if((*it).second==aaa)nowarr=1;
 			else nowarr=3;
 		}
 		if(nowarr==3){
@@ -125,11 +115,12 @@ int main(){
 			if(it==py[nowy].begin()) break;
 			it--;
 			nowx=(*it).first;
-			if((*it).second==1)nowarr=0;
+			if((*it).second==aaa)nowarr=0;
 			else nowarr=2;
 		}
 		ans++;
 	}
+		cout<<"ans="<<ans<<",x="<<nowx<<",y="<<nowy-maxx<<",arr="<<nowarr<<"\n";
 	cout<<ans;
 	
 	return 0;
