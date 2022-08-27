@@ -51,7 +51,6 @@ int main(){
 		cout.tie(0);
 		ios::sync_with_stdio(false);
 	}
-	
 	{/*處理輸入*/
 		cin>>n;
 		for(UINT i=0;i<n;i++){
@@ -84,34 +83,35 @@ int main(){
 	while(true){
 		switch(nowarr){
 			{case 0:
-				auto it=upper_bound((px[nowx]).begin(),(px[nowx]).end(),{nowy,1});
-				if(it=px[nowx].end()) break;
+				auto it=upper_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,1));
+				if(it==px[nowx].end()) break;
 				nowy=(*it).first;
-				if((*it).second)nowarr=3;
+				if((*it).second==1)nowarr=3;
 				else nowarr=1;
 			break;}
 			{case 1:
-				auto it=upper_bound((py[nowy]).begin(),(py[nowy]).end(),{nowx,1});
-				if(it=py[nowy].end()) break;
+				auto it=upper_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,1));
+				if(it==py[nowy].end()) break;
 				nowx=(*it).first;
-				if((*it).second)nowarr=2;
+				if((*it).second==1)nowarr=2;
 				else nowarr=0;
 			break;}
 			{case 2:
-				auto it=lower_bound((px[nowx]).begin(),(px[nowx]).end(),{nowy,0});
-				if(it=px[nowx].begin()) break;
+				auto it=lower_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,0));
+				if(it==px[nowx].begin()) break;
 				nowy=(*it).first;
-				if((*it).second)nowarr=1;
+				if((*it).second==1)nowarr=1;
 				else nowarr=3;
 			break;}
 			{case 3:
-				auto it=lower_bound((py[nowy]).begin(),(py[nowy]).end(),{nowx,0});
-				if(it=py[nowy].begin()) break;
+				auto it=lower_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,0));
+				if(it==py[nowy].begin()) break;
 				nowx=(*it).first;
-				if((*it).second)nowarr=0;
+				if((*it).second==1)nowarr=0;
 				else nowarr=2;
 			break;}
 		}
+		ans++;
 	}
 	cout<<ans;
 	return 0;
@@ -138,3 +138,4 @@ int main(){
 /*
 
 */
+
