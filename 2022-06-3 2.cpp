@@ -4,7 +4,16 @@
 */
 
 /*include*/
-#include<bits/stdc++.h>
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<sstream>
+#include<vector>
+#include<queue>
+#include<deque>
+#include<map>
+#include<set>
 
 /*using namespace*/
 using namespace std;
@@ -14,7 +23,7 @@ using namespace std;
 #define lli long long int
 #define plli pair<lli,lli>
 #define pulli pair<ulli,ulli>
-#define INT lli
+#define INT int
 #define UINT unsigned INT
 #define pii pair<INT,INT>
 
@@ -70,24 +79,37 @@ int main(){
 		}
 	}
 	/*solve*/
-	INT nowx=0,nowy=maxx,nowarr=1,ans=0;
+	
+	INT nowx=0,nowy=maxx,nowarr=1,ans=0,aaa=1,bbb=0;
 	while(true){
 		if(nowarr==0){
-			auto it=upper_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,1));
+			auto it=upper_bound(
+				(px[nowx]).begin(),
+				(px[nowx]).end(),
+				make_pair(nowy,aaa)
+			);
 			if(it==px[nowx].end()) break;
 			nowy=(*it).first;
 			if((*it).second==1)nowarr=3;
 			else nowarr=1;
 		}
 		if(nowarr==1){
-			auto it=upper_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,1));
+			auto it=upper_bound(
+			    (py[nowy]).begin(),
+			    (py[nowy]).end(),
+			    make_pair(nowx,aaa)
+			);
 			if(it==py[nowy].end()) break;
 			nowx=(*it).first;
 			if((*it).second==1)nowarr=2;
 			else nowarr=0;
 		}
 		if(nowarr==2){
-			auto it=lower_bound((px[nowx]).begin(),(px[nowx]).end(),make_pair(nowy,0));
+			auto it=lower_bound(
+			    (px[nowx]).begin(),
+			    (px[nowx]).end(),
+			    make_pair(nowy,bbb)
+			);
 			if(it==px[nowx].begin()) break;
 			it--;
 			nowy=(*it).first;
@@ -95,7 +117,11 @@ int main(){
 			else nowarr=3;
 		}
 		if(nowarr==3){
-			auto it=lower_bound((py[nowy]).begin(),(py[nowy]).end(),make_pair(nowx,0));
+			auto it=lower_bound(
+			    (py[nowy]).begin(),
+			    (py[nowy]).end(),
+			    make_pair(nowx,bbb)
+			);
 			if(it==py[nowy].begin()) break;
 			it--;
 			nowx=(*it).first;
@@ -105,6 +131,7 @@ int main(){
 		ans++;
 	}
 	cout<<ans;
+	
 	return 0;
 }
 
