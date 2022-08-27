@@ -1,0 +1,25 @@
+{
+	"gitname":"APCS",
+	"gitlog":[
+		{"name":"main",
+			"verson_tree":[
+				{"time":"08-27-2022-10:30",
+					"by":{"name":"ET01","mail":"kagariet01@outlook.com"},
+					"do":"git create",
+					"name":"APCS"
+				},
+				{"time":"08-27-2022-10:30",
+					"by":{"name":"ET01","mail":"kagariet01@outlook.com"},
+					"do":"files edit",
+					"add":[
+						"./git_log.json"
+					],
+					"remove":[],
+					"edit":[],
+					"other_thing":"",
+					"other_branch":[]
+				}
+			]
+		}
+	]
+}
