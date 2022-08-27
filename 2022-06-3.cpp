@@ -21,16 +21,16 @@ using namespace std;
 /*define type*/
 #define ulli unsigned long long int
 #define lli long long int
-#define pii pair<int,int>
-#define plli pair<lli,lli>
-#define pulli pair<ulli,ulli>
+#define pii pair<INT,INT>
 #define INT int
 #define UINT unsigned INT
 
 /*struct*/
 
 /*num*/
+const maxx=30000
 UINT n;
+vector<pii>
 
 /*fn*/
 /*
@@ -53,7 +53,13 @@ int main(){
 	cin.tie(0);
 	cout.tie(0);
 	ios::sync_with_stdio(false);
-		cin>>n;
+	cin>>n;
+	for(UINT i=0;i<n;i++){
+		INT x,y,t;
+		cin>>x>>y>>t;
+		y+=maxx;
+
+	}
 	return 0;
 }
 
