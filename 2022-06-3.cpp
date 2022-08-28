@@ -1,61 +1,129 @@
-#include <bits/stdc++.h>
+/*
+[Q]https://zerojudge.tw/ShowProblem?problemid=i401
+[AC]
+*/
+
+/*include*/
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<sstream>
+#include<vector>
+#include<queue>
+#include<deque>
+#include<map>
+#include<set>
+
+/*using namespace*/
 using namespace std;
- 
-const int maxn = 30000;
-// vx[i]: x 座標為 i 的鏡子，依照 y 座標排序。
-// vy[i]: y 座標為 i 的鏡子，依照 x 座標排序。
-vector <pair<int, int> > vx[maxn+5], vy[maxn*2+5];
- 
+
+/*define type*/
+#define ulli unsigned long long int
+#define lli long long int
+#define plli pair<lli,lli>
+#define pulli pair<ulli,ulli>
+#define INT int
+#define UINT unsigned INT
+#define pii pair<INT,INT>
+
+/*struct*/
+
+/*num*/
+const INT maxx=30000;
+UINT n;
+vector<pii> px[maxx+5],py[maxx*2+10];
+INT minx,miny,bigx,bigy;
+
+/*fn*/
+/*
+定義角度
+0=上面
+1=右邊
+2=下面
+3=左邊
+*/
+
+/*main*/
 int main(){
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int n;
-    cin >> n;
-    for (int i = 0, x, y, t; i < n; i++){
-        cin >> x >> y >> t;
-        y += maxn;
-        vx[x].push_back({y, t});
-        vy[y].push_back({x, t});
-    }
-    for (int i = 1; i <= maxn; i++) sort(vx[i].begin(), vx[i].end());
-    for (int i = 0; i <= maxn*2; i++) sort(vy[i].begin(), vy[i].end());
- 
-    int x = 0, y = maxn, d = 1;
-    int cnt = 0;
-    while (1){
-        if (d == 0){
-            auto it = upper_bound(vx[x].begin(), vx[x].end(), make_pair(y, 1));
-            if (it == vx[x].end()) break;
-            y = (*it).first;
-            if ((*it).second == 1) d = 3;
-            else d = 1;
-        }
-        if (d == 1){
-            auto it = upper_bound(vy[y].begin(), vy[y].end(), make_pair(x, 1));
-            if (it == vy[y].end()) break;
-            x = (*it).first;
-            if ((*it).second == 1) d = 2;
-            else d = 0;
-        }
-        if (d == 2){
-            auto it = lower_bound(vx[x].begin(), vx[x].end(), make_pair(y, 0));
-            if (it == vx[x].begin()) break;
-            it--;
-            y = (*it).first;
-            if ((*it).second == 1) d = 1;
-            else d = 3;
-        }
-        if (d == 3){
-            auto it = lower_bound(vy[y].begin(), vy[y].end(), make_pair(x, 0));
-            if (it == vy[y].begin()) break;
-            it--;
-            x = (*it).first;
-            if ((*it).second == 1) d = 0;
-            else d = 2;
-        }
-        cnt++;
-    }
-    cout << cnt << "\n";
+	{/*IO加速*/
+		cin.tie(0);
+		cout.tie(0);
+		ios::sync_with_stdio(false);
+	}
+	{/*處理輸入*/
+		cin>>n;
+		for(UINT i=0;i<n;i++){
+			INT x,y,t;
+			cin>>x>>y>>t;
+			y+=maxx;
+			(px[x]).push_back({y,t});
+			(py[y]).push_back({x,t});
+		}
+		for(INT i=0;i<=maxx;i++){
+			sort((px[i]).begin(),(px[i]).end());
+		}
+		for(INT i=0;i<=maxx*2;i++){
+			sort((py[i]).begin(),(py[i]).end());
+		}
+	}
+	/*solve*/
+	
+	INT nowx=0,nowy=maxx,nowarr=1,ans=0,aaa=1,bbb=0;
+	while(true){
+		cout<<"ans="<<ans<<",x="<<nowx<<",y="<<nowy-maxx<<",arr="<<nowarr<<"\n";
+		if(nowarr==0){
+			auto it=upper_bound(
+				(px[nowx]).begin(),
+				(px[nowx]).end(),
+				make_pair(nowy,aaa)
+			);
+			if(it==px[nowx].end()) break;
+			nowy=(*it).first;
+			if((*it).second==aaa)nowarr=3;
+			else nowarr=1;
+		}
+		else if(nowarr==1){
+			auto it=upper_bound(
+			    (py[nowy]).begin(),
+			    (py[nowy]).end(),
+			    make_pair(nowx,aaa)
+			);
+			if(it==py[nowy].end()) break;
+			nowx=(*it).first;
+			if((*it).second==aaa)nowarr=2;
+			else nowarr=0;
+		}
+		else if(nowarr==2){
+			auto it=lower_bound(
+			    (px[nowx]).begin(),
+			    (px[nowx]).end(),
+			    make_pair(nowy,bbb)
+			);
+			if(it==px[nowx].begin()) break;
+			it--;
+			nowy=(*it).first;
+			if((*it).second==aaa)nowarr=1;
+			else nowarr=3;
+		}
+		else if(nowarr==3){
+			auto it=lower_bound(
+			    (py[nowy]).begin(),
+			    (py[nowy]).end(),
+			    make_pair(nowx,bbb)
+			);
+			if(it==py[nowy].begin()) break;
+			it--;
+			nowx=(*it).first;
+			if((*it).second==aaa)nowarr=0;
+			else nowarr=2;
+		}
+		ans++;
+	}
+		cout<<"ans="<<ans<<",x="<<nowx<<",y="<<nowy-maxx<<",arr="<<nowarr<<"\n";
+	cout<<ans;
+	
+	return 0;
 }
 
 /*
