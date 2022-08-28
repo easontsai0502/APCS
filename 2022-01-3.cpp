@@ -52,7 +52,9 @@ int main(){
 			int sl=slist[i].length();
 			if(l<3)continue;
 			for(int j=1;j<=l/2;j++){
-				
+				string frontastr=(slist[i]).substr(0,j);
+				string backastr=(slist[i]).substr(l-j,j);
+				if(scopy==)
 			}
 		}
 	}
@@ -61,7 +63,21 @@ int main(){
 
 /*
 [I1]
+3
+a
+aba
+aaa
 [O1]
+1
+[I2]
+5
+abyyyab
+y
+yy
+yyy
+yyyy
+[O2]
+3
 */
 
 /*think*/
