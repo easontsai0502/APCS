@@ -47,17 +47,27 @@ int main(){
 			st.insert(slist[i]);
 		}
 	}
+	UINT ans=0;
 	{/*solve*/
 		for(int i=0;i<m;i++){
-			int sl=slist[i].length();
+			int l=slist[i].length();
 			if(l<3)continue;
 			for(int j=1;j<=l/2;j++){
+				/*
+				string.substr(開始位置(int),長度(int)):複製字串
+				*/
 				string frontastr=(slist[i]).substr(0,j);
 				string backastr=(slist[i]).substr(l-j,j);
-				if(scopy==)
+				if(frontastr==backastr){
+					string bstr=(slist[i]).substr(j,l-j-j);
+					if(st.count(bstr)){
+						ans++;
+					}
+				}
 			}
 		}
 	}
+	cout<<ans;
 	return 0;
 }
 
