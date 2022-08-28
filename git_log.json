@@ -14,7 +14,7 @@
 					"add":[
 						"./git_log.json",
 						"./basic.cpp",
-						"2022-06-3.cpp"
+						"./2022-06-3.cpp"
 					],
 					"remove":[],
 					"edit":[],
