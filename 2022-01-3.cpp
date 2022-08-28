@@ -1,6 +1,6 @@
 /*
-[Q]
-[]
+[Q]https://zerojudge.tw/ShowProblem?problemid=h083
+[AC]
 */
 
 /*include*/
