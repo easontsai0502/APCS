@@ -28,16 +28,16 @@ using namespace std;
 /*struct*/
 
 /*num*/
-const UINT maxnm=1000
+const UINT maxnm=1000;
 UINT n,m;
 INT a[maxnm+1],b[maxnm+1],br[maxnm+1],ans;
 /*fn*/
-void solver(){
+void solver(INT x,INT y){
 
 }
 
-void solverbr(){
-	
+void solverbr(INT x,INT y){
+
 }
 
 /*main*/
@@ -54,12 +54,21 @@ int main(){
 		}
 		for(int i=0;i<m;i++){
 			cin>>b[i];
-			br=b[m-i-1];
+			br[i]=b[m-i-1];
 		}
 	}
+	ans=a[0]*b[0];
 	{/*solve*/
-
+		for(int i=0;i<n;i++){
+			solver(i,0);
+			solverbr(i,0);
+		}
+		for(int i=0;i<m;i++){
+			solver(0,i);
+			solverbr(0,i);
+		}
 	}
+	cout<<ans;
 	return 0;
 }
 
