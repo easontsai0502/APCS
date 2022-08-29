@@ -32,6 +32,18 @@
 					"edit":[],
 					"other_thing":"",
 					"other_branch":[]
+				},
+				{"time":"08-29-2022-19:36",
+					"by":{"name":"ET01","mail":"kagariet01@outlook.com"},
+					"do":"files edit",
+					"add":[
+						"./2022-06-4.cpp",
+						"./2022-01-3.cpp"
+					],
+					"remove":[],
+					"edit":[],
+					"other_thing":"",
+					"other_branch":[]
 				}
 			]
 		}
