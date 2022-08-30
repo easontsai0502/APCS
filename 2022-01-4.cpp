@@ -1,6 +1,6 @@
 /*
-[Q]
-[]
+[Q]https://zerojudge.tw/ShowProblem?problemid=h084
+[AC]
 */
 
 /*include*/
@@ -31,44 +31,24 @@ using namespace std;
 UINT n,k,h[200001],w[5001];
 UINT minheigh,maxheigh;
 /*fn*/
-UINT listfinder(UINT i){
-	UINT dow=0,up=k,p;
-	while(up-dow-1){
-		p=(up+dow+1)/2;
-		if(w[p]>i){
-			up=p;
-		}else{
-			dow=p;
-		}
-	}
-	return p;
-}
 bool solver(UINT p){
-	UINT now=0,currcount=0;
-	map<UINT,bool> currlist;
+	UINT now=0,thisk=0;
 	for(int i=0;i<n;i++){
 		if(h[i]>=p){
 			now++;
+			if(now>=w[thisk]){
+				now-=w[thisk];
+				if(thisk+1==k){
+					return true;
+					break;
+				}
+				thisk++;
+			}
 		}else{
-			UINT f=listfinder(now);
-			while(!(currlist[f]) && f){
-				f--;
-			}
-			if(f>=0){
-				currlist[f]=true;
-				currcount++;
-			}
 			now=0;
 		}
-		if(!(currcount-k)){
-		    break;
-		}
 	}
-	if(currcount-k){
-		return false;
-	}else{
-		return true;
-	}
+	return false;
 }
 /*main*/
 int main(){
@@ -92,16 +72,18 @@ int main(){
 		for(UINT i=0;i<k;i++){
 			cin>>w[i];
 		}
-		sort(&(w[0]),&(w[k]));
 	}
 	maxheigh++;
 	{/*solve*/
-		while(maxheigh-minheigh-1){
-		    cout<<maxheigh<<","<<minheigh<<"\n";
-			if(solver((maxheigh+minheigh+1)/2)){
-				minheigh=(maxheigh+minheigh+1)/2;
+		while(maxheigh-minheigh>1){
+			UINT now=(maxheigh+minheigh+1)/2;
+			//cout<<maxheigh<<","<<minheigh<<","<<now;
+			if(solver(now)){
+				minheigh=now;
+				//cout<<",t\n";
 			}else{
-				maxheigh=(maxheigh+minheigh+1)/2;
+				maxheigh=now;
+				//cout<<",f\n";
 			}
 		}
 	}
