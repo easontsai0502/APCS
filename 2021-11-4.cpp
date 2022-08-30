@@ -46,20 +46,21 @@ vector<UINT> now[nmmax+1];
 //now為每個人的連結(就是樹)
 
 /*fn*/
-bool dfs(UINT n,UINT las){
-	for(UINT i:now[n]){
+bool dfs(UINT x,UINT las){
+	for(UINT i:now[x]){
 		if(i==las){continue;}
 		if(!flag[i]){//若此人未分組，幫她分組
-			flag[i]=3-flag[n];//若a在1，將b分到2，反之...
-			if(!dfs(i,n))return false;
+			flag[i]=3-flag[x];//若a在1，將b分到2，反之...
+			if(!dfs(i,x))return false;
 		}else{//若這個人被分過組
-			if(flag[i]==flag[n]){//檢測是否同組
+			if(flag[i]==flag[x]){//檢測是否同組
 				return false;
 			}
 		}
 	}
+	return true;//偌多通過，回傳true
 }
-bool checker(UINT n){
+bool checker(UINT x){
 	for(int i=0;i<n;i++){//初始化變數
 		now[i].clear();
 		flag[i]=0;
@@ -68,9 +69,19 @@ bool checker(UINT n){
 		now[i.first].push_back(i.second);
 		now[i.second].push_back(i.first);
 	}
-	for(int i=0;i<n;i++){
-		
+	for(int i=1;i<=x;i++){//將1~x的資料存入now(池化快塞)
+		for(auto j:otherlist[i]){
+			now[j.first].push_back(j.second);
+			now[j.second].push_back(j.first);
+		}
 	}
+	for(int i=0;i<n;i++){//dfs
+		if(!flag[i]){//若他還沒分組，就讓她分
+			flag[i]=1;
+			if(!dfs(i,i))return false;//若該結果產生矛盾，回傳false
+		}
+	}
+	return true;//若都通過，回傳true
 }
 
 /*main*/
@@ -88,7 +99,7 @@ int main(){
 			mainlist.push_back({pa,pb});
 		}
 		cin>>p>>k;
-		for(int i=0;i<p;i++){
+		for(int i=1;i<=p;i++){
 			for(int j=0;j<k;j++){
 				UINT pa,pb;
 				cin>>pa>>pb;
@@ -101,7 +112,14 @@ int main(){
 		for(int i=0;i<3;i++){//題目說1~3個，所以找3次就好了
 			while(r-l>1){//使用二分搜找出有問題的那幾個
 				UINT nowp=(r+l)/2;
-			}
+				if(checker(nowp)) l=nowp;//沒問題就往右找
+				else r=nowp;//有問題就往左找
+			}//因為如果是正確的data會是原data，所以所有正確的data丟進去都不會矛盾
+			cout<<r<<"\n";
+			otherlist[r].clear();//清除錯誤
+			l=r;//從錯誤處開始往右找
+			r=p;
+			if(checker(p))break;//如果錯誤都清掉了就可以離開了
 		}
 	}
 	return 0;
