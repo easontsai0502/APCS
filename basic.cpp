@@ -41,7 +41,9 @@ int main(){
 	{/*CIN*/
 
 	}
-	/*solve*/
+	{/*solve*/
+
+	}
 	return 0;
 }
 
