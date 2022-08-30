@@ -19,11 +19,12 @@
 using namespace std;
 
 /*define type*/
-#define ulli unsigned long long int
-#define lli long long int
+#define ULLI unsigned long long int
+#define LLI long long int
 #define INT int
 #define UINT unsigned INT
-#define pii pair<INT,INT>
+#define PII pair<INT,INT>
+#define PUIUI pair<UINT,UINT>
 
 /*struct*/
 
