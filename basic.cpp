@@ -28,9 +28,11 @@ using namespace std;
 
 /*struct*/
 
+/*fn宣告*/
+
 /*num*/
 
-/*fn*/
+/*fn定義*/
 
 /*main*/
 int main(){
