@@ -62,7 +62,8 @@
 					"by":{"name":"ET01","mail":"kagariet01@outlook.com"},
 					"do":"files edit",
 					"add":[
-						"./2021-11-3.cpp"
+						"./2021-11-3.cpp",
+						"./2021-09-3.cpp"
 					],
 					"remove":[],
 					"edit":[],
