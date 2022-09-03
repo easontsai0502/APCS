@@ -1,27 +1,6 @@
 /*
 [Q]https://zerojudge.tw/ShowProblem?problemid=f314
-[16/20]AC
-[04/20]WA
-[00]AC
-[01]AC
-[02]AC
-[03]AC
-[04]AC
-[05]  WA
-[06]AC
-[07]AC
-[08]  WA
-[09]  WA
-[10]AC
-[11]AC
-[12]AC
-[13]AC
-[14]AC
-[15]AC
-[16]  WA
-[17]AC
-[18]AC
-[19]AC
+[AC]
 */
 
 /*include*/
@@ -81,11 +60,11 @@ int main(){
 	{/*solve*/
 		for(INT i=1;i<=m;i++){
 			//go down
-            for(int j=01;j<=n;j++){
+            for(int j=1;j<=n;j++){
                 nowline[j]=dp[i-1][j]+ma[i][j];
             }
 			//go right
-			for(int j=1;j<n;j++){
+			for(int j=1;j<=n;j++){
 				goright[j]=max(nowline[j],goright[j-1]+ma[i][j]);
 			}
 			//go left
