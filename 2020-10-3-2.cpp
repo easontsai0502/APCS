@@ -1,14 +1,14 @@
 /*
 [Q]https://zerojudge.tw/ShowProblem?problemid=f314
-[14/20]AC
-[06/20]WA
+[16/20]AC
+[04/20]WA
 [00]AC
 [01]AC
 [02]AC
 [03]AC
-[04]  WA
+[04]AC
 [05]  WA
-[06]  WA
+[06]AC
 [07]AC
 [08]  WA
 [09]  WA
@@ -71,58 +71,37 @@ int main(){
 	}
 	{/*CIN*/
 		cin>>m>>n;
-		for(INT i=0;i<m;i++){
-			for(INT j=0;j<n;j++){
+		for(INT i=1;i<=m;i++){
+			for(INT j=1;j<=n;j++){
 				cin>>ma[i][j];
 			}
 		}
 	}
 	INT ans=0;
 	{/*solve*/
-		for(INT i=0;i<m;i++){
+		for(INT i=1;i<=m;i++){
 			//go down
-			if(i==0){
-				for(int j=0;j<n;j++){
-					nowline[j]=ma[i][j];
-				}
-			}else{
-				for(int j=0;j<n;j++){
-					nowline[j]=dp[i-1][j]+ma[i][j];
-				}
-			}
+            for(int j=01;j<=n;j++){
+                nowline[j]=dp[i-1][j]+ma[i][j];
+            }
 			//go right
 			for(int j=1;j<n;j++){
-				if(j==1){
-					goright[j]=max(nowline[j],nowline[j-1]+ma[i][j]);
-				}else{
-					goright[j]=max(nowline[j],goright[j-1]+ma[i][j]);
-				}
+				goright[j]=max(nowline[j],goright[j-1]+ma[i][j]);
 			}
 			//go left
-			for(int j=n-1;j>0;j--){
-				if(j==n-1){
-					goleft[j]=max(nowline[j],nowline[j+1]+ma[i][j]);
-				}else{
-					goleft[j]=max(nowline[j],goleft[j+1]+ma[i][j]);
-				}
+			for(int j=n;j>=0;j--){
+				goleft[j]=max(nowline[j],goleft[j+1]+ma[i][j]);
 			}
 			//find ans
-			for(int j=0;j<n;j++){
-				if(j==0){
-					dp[i][j]=max(nowline[j],goleft[j]);
-				}else if(j==n-1){
-					dp[i][j]=max(nowline[j],goright[j]);
-				}else{
+			for(int j=1;j<=n;j++){
 				dp[i][j]=max(nowline[j],max(goright[j],goleft[j]));
-				}
 			}
-			for(int j=0;j<n;j++){
+			for(int j=1;j<=n;j++){
 				nowline[j]=goright[j]=goleft[j]=0;
 			}
 		}
-		for(int j=0;j<n;j++){
-			if(j==0)ans=dp[m-1][j];
-			else ans=max(ans,dp[m-1][j]);
+		for(int j=1;j<=n;j++){
+			ans=max(ans,dp[m][j]);
 		}
 	}
 	cout<<ans;
