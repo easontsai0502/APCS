@@ -6,32 +6,26 @@
 #include<vector>
 #include<map>
 #include<algorithm>
+#include<set>
 using namespace std;
+#define ulli unsigned long long int
 int main(){
-	int n,l;
+	ulli n,l;
 	cin>>n>>l;
-	map<int,int> cutlist;
-	for(int i=0;i<n;i++){
-		int x,ii;
+	map<ulli,ulli> cutlist;
+	for(ulli i=0;i<n;i++){
+		ulli x,ii;
 		cin>>x>>ii;
 		cutlist[ii]=x;
 	}
-	vector<int> loglist;
-	loglist.push_back(0);
-	loglist.push_back(l);
-	int prize=0;
-	for(int i=1;i<=n;i++){
-		int lef=0,rig=0;
-		vector<int>::iterator it;
-		for(int j=0;j<i;j++){
-			if(loglist[j]<cutlist[i]){
-				lef=loglist[j];
-				rig=loglist[j+1];
-				it=loglist.begin()+j+1;
-			}else{break;}
-		}
-		prize+=rig-lef;
-		loglist.insert(it,cutlist[i]);
+	set<ulli> loglist;
+	loglist.insert(0);
+	loglist.insert(l);
+	ulli prize=0;
+	for(ulli i=1;i<=n;i++){
+		loglist.insert(cutlist[i]);
+		set<ulli>::iterator it=loglist.lower_bound(cutlist[i]);
+		prize+=*next(it)-*prev(it);
 		
 	}
 	cout<<prize;
