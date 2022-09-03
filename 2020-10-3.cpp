@@ -110,9 +110,9 @@ int main(){
 			for(int j=0;j<n;j++){
 				dp[i][j]=max(nowline[j],max(goright[j],goleft[j]));
 			}
-		}
-		for(int j=0;j<n;j++){
-			nowline[j]=goright[j]=goleft[j]=0;
+			for(int j=0;j<n;j++){
+				nowline[j]=goright[j]=goleft[j]=0;
+			}
 		}
 		for(int j=0;j<n;j++){
 			if(j==0)ans=dp[m-1][j];
