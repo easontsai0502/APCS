@@ -33,9 +33,12 @@ using namespace std;
 
 /*num*/
 const UINT maxn=1e6;
+UINT n,k;
 //n為攤位數
 //k為人數
+UINT a[maxn+1];
 //a為攤位的食物
+UINT maxlef[maxn+1];
 //maxlef為在i攤位最多可以連續往左吃到哪
 //例如maxlef[3]=1代表官員可以連續從1吃到3
 
@@ -49,16 +52,14 @@ int main(){
 		ios::sync_with_stdio(false);
 	}
 	UINT canl=0;
-	/*CIN*/
-		UINT n,k;
+	{/*CIN*/
 		cin>>n>>k;
-		UINT a[n+10],maxlef[n+10];
 		for(UINT i=0;i<n;i++){
 			cin>>a[i];
 			while(canl<i && count(a+canl,a+i-1,a[i]))canl++;
 			maxlef[i]=canl;
 		}
-	
+	}
 	UINT dp[k][n];
 	UINT ans=0;
 	{/*solve*/
@@ -67,7 +68,7 @@ int main(){
 				UINT nowmax=0;
 				for(UINT nowl=maxlef[j];nowl<=j;nowl++){
 					UINT thi=j-nowl+1;
-					if(i && nowl){
+					if(i-1>=0 && nowl-1>=0){
 						thi+=dp[i-1][nowl-1];
 					}
 					nowmax=max(thi,nowmax);
