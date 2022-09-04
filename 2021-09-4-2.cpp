@@ -47,33 +47,35 @@ int main(){
 		cout.tie(0);
 		ios::sync_with_stdio(false);
 	}
-	UINT canl=0;
+	INT canl=0;
 	/*CIN*/
-		UINT n,k;
+		INT n,k;
 		cin>>n>>k;
-		UINT a[n+10],maxlef[n+10];
-		for(UINT i=0;i<n;i++){
+		INT a[n+10],maxlef[n+10];
+		for(INT i=0;i<n;i++){
 			cin>>a[i];
-			while(canl<i && count(a+canl,a+i-1,a[i]))canl++;
+			while(canl<i && count(a+canl,a+i,a[i]))canl++;
 			maxlef[i]=canl;
+			//cout<<canl<<" ";
 		}
+		//cout<<"\n\n";
 	
-	UINT dp[k][n];
-	UINT ans=0;
+	map<INT,map<INT,INT>> dp;
+	INT ans=0;
 	{/*solve*/
-		for(UINT i=0;i<k;i++){//人的for迴圈
-			for(UINT j=0;j<n;j++){//食物的for迴圈
-				UINT nowmax=0;
-				for(UINT nowl=maxlef[j];nowl<=j;nowl++){
-					UINT thi=j-nowl+1;
-					if(i && nowl){
-						thi+=dp[i-1][nowl-1];
-					}
+		for(INT i=0;i<k;i++){//人的for迴圈
+			for(INT j=0;j<n;j++){//食物的for迴圈
+				INT nowmax=0;
+				for(INT nowl=maxlef[j];nowl<=j;nowl++){
+					INT thi=j-nowl+1;
+					thi+=dp[i-1][nowl-1];
 					nowmax=max(thi,nowmax);
 				}
 				dp[i][j]=nowmax;
 				ans=max(nowmax,ans);
+				//cout<<dp[i][j]<<" ";
 			}
+	    	//cout<<"\n";
 		}
 	}
 	cout<<ans;
