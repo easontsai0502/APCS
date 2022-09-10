@@ -14,6 +14,8 @@
 #include<deque>
 #include<map>
 #include<set>
+#include<stack>
+#include<cstring>
 
 /*using namespace*/
 using namespace std;

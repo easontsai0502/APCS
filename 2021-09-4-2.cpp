@@ -1,6 +1,6 @@
 /*
 [Q]https://zerojudge.tw/ShowProblem?problemid=g278
-[RE]
+[TLE]
 */
 
 /*include*/
