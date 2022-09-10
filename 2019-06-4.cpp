@@ -35,7 +35,8 @@ using namespace std;
 
 /*num*/
 string a[200005];
-unordered_map<string,INT>;
+unordered_map<string,INT> ma;
+INT m,n;
 /*fn定義*/
 
 /*main*/
@@ -46,10 +47,13 @@ int main(){
 		ios::sync_with_stdio(false);
 	}
 	{/*CIN*/
-
+		cin>>m>>n;
+		for(int i=0;i<n;i++){
+			cin>>a[i];
+		}
 	}
 	{/*solve*/
-
+		
 	}
 	return 0;
 }
