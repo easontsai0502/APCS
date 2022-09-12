@@ -69,9 +69,20 @@ int main(){
 			}
 		}
 		for(int j=0;j<m;j++){
-			deque.
+			de.push_back(str[j]);
+		}
+		str.clear();
+		for(int j=0;j<m;j++){
+			if(tf[i][j]){
+				str.push_back(de.back());
+				de.pop_back();
+			}else{
+				str.push_back(de.front());
+				de.pop_front();
+			}
 		}
 	}
+	cout<<str;
 	return 0;
 }
 
