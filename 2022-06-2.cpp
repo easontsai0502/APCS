@@ -57,30 +57,27 @@ int main(){
 		}
 		doswap[i]=(cou%2==1);
 	}
-	string str;
-	cin>>str;
-	for(int i=0;i<n;i++){
-		deque<char> de;
-		for(int j=m-1;j>=0;j--){
+	string S="",T="";
+	cin>>T;
+	for(int i=n-1;i>=0;i--){
+		S="";
+		for(int j=n-1;j>=0;j--){
 			if(tf[i][j]){
-				de.push_back(str[j]);
+				S+=S+T[j];
 			}else{
-				de.push_front(str[j]);
+				S+=T[j]+S;
 			}
-		}
-		for(int j=0;j<n;j++){
-			str[j]=de.front();
-			de.pop_front();
 		}
 		if(doswap[i]){
-			int adda=m%2;
-			int he=m/2;
-			for(int j=0;j<he;j++){
-				swap(str[j],str[j+he+adda]);
+			if(m%2){
+				S=S.substr(m/2+1,m/2)+S.substr(m/2,1)+S.substr(0,m/2);
+			}else{
+				S=S.substr(m/2,m/2)+S.substr(0,m/2);
 			}
 		}
+		T=S;
 	}
-	cout<<str;
+	cout<<T;
 	return 0;
 }
 
