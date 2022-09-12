@@ -1,6 +1,6 @@
 /*
-[Q]
-[]
+[Q]https://zerojudge.tw/ShowProblem?problemid=i400
+[WA]
 */
 
 /*include*/
@@ -61,24 +61,22 @@ int main(){
 	cin>>str;
 	for(int i=0;i<n;i++){
 		deque<char> de;
+		for(int j=m-1;j>=0;j--){
+			if(tf[i][j]){
+				de.push_back(str[j]);
+			}else{
+				de.push_front(str[j]);
+			}
+		}
+		for(int j=0;j<n;j++){
+			str[j]=de.front();
+			de.pop_front();
+		}
 		if(doswap[i]){
 			int adda=m%2;
 			int he=m/2;
 			for(int j=0;j<he;j++){
 				swap(str[j],str[j+he+adda]);
-			}
-		}
-		for(int j=0;j<m;j++){
-			de.push_back(str[j]);
-		}
-		str.clear();
-		for(int j=0;j<m;j++){
-			if(tf[i][j]){
-				str.push_back(de.back());
-				de.pop_back();
-			}else{
-				str.push_back(de.front());
-				de.pop_front();
 			}
 		}
 	}
