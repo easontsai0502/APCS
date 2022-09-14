@@ -38,7 +38,7 @@ bool debug_mod=false;
 /*num*/
 const int maxn=105;
 int ma[maxn][maxn];
-int m,n,h;
+int m,n;
 int movex[]={0,1,0,-1};//上右下左
 int movey[]={1,0,-1,0};//上右下左
 /*fn定義*/
@@ -61,25 +61,20 @@ int main(){
 		cout.tie(0);
 		ios::sync_with_stdio(false);
 	}
+	int h;
 	cin>>m>>n>>h;
 	debugger("original");
 	int r,c,t;
 	int mx=0;
 	int now=0;
-	for(int iii=0;iii<h;iii++){
+	while(h--){
 		cin>>r>>c>>t;
 		//拆線先
 		for(int i=0;i<4;i++){
 			int nowx=r+movex[i];
 			int nowy=c+movey[i];
 			bool isfind=false;
-			while(true){
-				if(nowx>=m || nowx<0){
-					break;
-				}
-				if(nowy>=n || nowy<0){
-					break;
-				}
+			while(nowx>=0 && nowx<m && nowy>=0 && nowy<n){//e04問題出在這，最後一個n打成0，幹
 				if(ma[nowx][nowy]==0){
 					//沒線
 					break;
@@ -111,13 +106,7 @@ int main(){
 				int nowx=r+movex[i];
 				int nowy=c+movey[i];
 				bool isfind=false;
-				while(true){
-					if(nowx>=m || nowx<0){
-						break;
-					}
-					if(nowy>=n || nowy<0){
-						break;
-					}
+				while(nowx>=0 && nowx<m && nowy>=0 && nowy<n){
 					if(ma[nowx][nowy]==-1){
 						//找到柱子
 						isfind=true;
