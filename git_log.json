@@ -217,6 +217,23 @@
 					],
 					"other_thing":"",
 					"other_branch":[]
+				},
+				{
+					"time": "09-15-2022-20:40",
+					"by": {
+						"name": "ET01",
+						"mail": "kagariet01@outlook.com"
+					},
+					"do": "files edit",
+					"add": [
+						"./2022-01-1.cpp",
+						"./2022-01-2.cpp",
+						"./2022-01-2-2.cpp"
+					],
+					"remove": [],
+					"edit": [],
+					"other_thing": "",
+					"other_branch": []
 				}
 			]
 		}
