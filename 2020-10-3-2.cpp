@@ -36,9 +36,18 @@ const UINT maxn=1e4;
 INT ma[maxm+5][maxn+5];
 INT dp[maxm+5][maxn+5];
 INT n,m;
+
 INT nowline[maxn+5];
+//往下走
+//從上面走到現在這格
+
 INT goright[maxn+5];
+//往右走
+//從左邊走到這格
+
 INT goleft[maxn+5];
+//往左走
+//從右邊走到這格
 /*fn定義*/
 
 /*main*/
@@ -60,9 +69,9 @@ int main(){
 	{/*solve*/
 		for(INT i=1;i<=m;i++){
 			//go down
-            for(int j=1;j<=n;j++){
-                nowline[j]=dp[i-1][j]+ma[i][j];
-            }
+			for(int j=1;j<=n;j++){
+					nowline[j]=dp[i-1][j]+ma[i][j];
+			}
 			//go right
 			for(int j=1;j<=n;j++){
 				goright[j]=max(nowline[j],goright[j-1]+ma[i][j]);
@@ -72,13 +81,16 @@ int main(){
 				goleft[j]=max(nowline[j],goleft[j+1]+ma[i][j]);
 			}
 			//find ans
+			//將答案加入dp
 			for(int j=1;j<=n;j++){
 				dp[i][j]=max(nowline[j],max(goright[j],goleft[j]));
 			}
+			//清空
 			for(int j=1;j<=n;j++){
 				nowline[j]=goright[j]=goleft[j]=0;
 			}
 		}
+		//尋找答案
 		for(int j=1;j<=n;j++){
 			ans=max(ans,dp[m][j]);
 		}
