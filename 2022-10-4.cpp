@@ -1,6 +1,6 @@
 /*
-[Q]https://zerojudge.tw/ShowProblem?problemid= [題目編號]
-[]
+[Q]https://zerojudge.tw/ShowProblem?problemid=j125
+[AC]
 */
 
 /*include*/
